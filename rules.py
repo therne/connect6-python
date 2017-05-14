@@ -30,7 +30,6 @@ class Referee:
 
     def __init__(self, initial_board):
         self.board = initial_board
-        self.moves = []
         self.last_move = (0, 0)
 
     def update(self, x, y, player):
@@ -76,11 +75,17 @@ class Referee:
         original_player = self.board[y][x]
         debug.log('Track started at {}'.format(Point(x, y)))
 
-        for i in range(5):
+        step = 1
+        while True:
             x, y = dir_func(x, y)
             if is_outta_range(x, y) or self.board[y][x] != original_player:
-                debug.log('Track finished at step %d' % (i+1))
+                debug.log('Track finished at step {}'.format(step))
                 return False
+            step += 1
+
+        if step > 6:
+            debug.log('Track success, but too many steps (step={})'.format(step))
+            return False
 
         return True
 
