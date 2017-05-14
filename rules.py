@@ -1,6 +1,6 @@
 
 from common import Point, Debugger, repr_direction
-debug = Debugger(enable_log=True)
+debug = Debugger(enable_log=False)
 
 # 8방향에 대한 함수들
 DIRECTIONS = [
