@@ -8,7 +8,7 @@ from config import AIBot
 
 # constants
 STONE_CHAR = ['.', 'O', 'X']
-PLAYER_NAME = ['','White (O)', 'Black (X)']
+STONE_NAME = ['', 'White (O)', 'Black (X)']
 CHAR_TO_X = {chr(ord('A') + i) : i for i in range(19)}
 X_TO_CHAR = {i: chr(ord('A')+i) for i in range(19)}
 
@@ -23,7 +23,7 @@ def darktext(str):
 def draw_board(board, player=0, nth_move=0):
     cls()
     print('Move : {}'.format(nth_move))
-    print('{} turn.'.format(PLAYER_NAME[player]))
+    print('{} turn.'.format(STONE_NAME[player]))
     print()
     print('       A B C D E F G H I J K L M N O P Q R S ')
     print('     +---------------------------------------+')
@@ -44,14 +44,14 @@ class Player(Bot):
     """ 플레이어도 봇으로 취급하지만, 사용자로부터 입력을 받음. """
 
     def move(self, board, nth_move):
-        move = input('{} turn : '.format(PLAYER_NAME[self.player]))
+        move = input('{} turn : '.format(STONE_NAME[self.player]))
         return Point.from_name(move)
 
 
-def exit_game(logger: MoveLogger, won_player=None):
-    if won_player is not None:
-        logger.log_winner(won_player.player)
-        print('{} ({}) won!!'.format(PLAYER_NAME[won_player.player], won_player.bot_kind))
+def exit_game(logger: MoveLogger, won_bot=None):
+    if won_bot is not None:
+        logger.log_winner(won_bot.player)
+        print('{} ({}) won!!'.format(STONE_NAME[won_bot.player], won_bot.bot_kind))
     else:
         print('No one won.')
 
@@ -99,7 +99,7 @@ def main(bots):
 
         won_player = referee.determine()
         if won_player is not None:
-            exit_game(logger, won_player)
+            exit_game(logger, bot_set[won_player])
             return
 
         player_moved_count += 1
