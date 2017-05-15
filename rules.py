@@ -79,6 +79,7 @@ class Referee:
         while True:
             x, y = dir_func(x, y)
             if is_outta_range(x, y) or self.board[y][x] != original_player:
+                if step == 6: return True
                 debug.log('Track finished at step {}'.format(step))
                 return False
             step += 1

@@ -88,7 +88,8 @@ def main(bots):
                 exit_game(logger)
                 return
 
-            except:
+            except Exception as e:
+                raise e
                 print('Wrong input.')
                 continue
 
